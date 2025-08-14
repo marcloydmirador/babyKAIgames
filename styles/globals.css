@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&family=Bubblegum+Sans&display=swap');
+
+@layer base {
+  html {
+    font-family: 'Comic Neue', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-gradient-to-br from-baby-blue via-baby-pink to-baby-yellow;
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .game-button {
+    @apply bg-gradient-to-r from-primary-400 to-primary-600 hover:from-primary-500 hover:to-primary-700 text-white font-bold py-4 px-8 rounded-full shadow-lg transform transition duration-200 hover:scale-105 active:scale-95;
+  }
+  
+  .baby-card {
+    @apply bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border-4 border-primary-200 p-6 transform transition duration-300 hover:scale-105;
+  }
+  
+  .floating-element {
+    @apply animate-bounce-slow;
+  }
+  
+  .interactive-zone {
+    @apply cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-110;
+  }
+}
+
+.colorful-text {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 3s ease infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
