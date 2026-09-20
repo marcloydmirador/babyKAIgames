@@ -6,6 +6,8 @@ import { Sparkles, Heart, Star, Gamepad2, Brain, Gift } from 'lucide-react'
 import GameSelector from '../components/GameSelector'
 import AICompanion from '../components/AICompanion'
 import PremiumModal from '../components/PremiumModal'
+import ShapeMatchGame from '../components/games/ShapeMatchGame'
+import ColorSplashGame from '../components/games/ColorSplashGame'
 
 export default function Home() {
   const [showPremium, setShowPremium] = useState(false)
@@ -24,6 +26,105 @@ export default function Home() {
 
   const handlePremiumClick = () => {
     setShowPremium(true)
+  }
+
+  const renderGame = () => {
+    switch (currentGame) {
+      case 'shape-match':
+        return <ShapeMatchGame onComplete={() => setCurrentGame(null)} />
+      case 'color-splash':
+        return <ColorSplashGame onComplete={() => setCurrentGame(null)} />
+      case 'story-time':
+        return (
+          <div className="baby-card max-w-4xl mx-auto text-center">
+            <h3 className="text-3xl font-bubbly colorful-text mb-6">AI Story Time 📚</h3>
+            <div className="text-6xl mb-4">📖</div>
+            <p className="text-xl text-primary-700 mb-6">
+              Interactive storytelling is coming soon! Our AI will create personalized stories for your little one.
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setCurrentGame(null)}
+              className="game-button"
+            >
+              ← Back to Games
+            </motion.button>
+          </div>
+        )
+      case 'music-maker':
+        return (
+          <div className="baby-card max-w-4xl mx-auto text-center">
+            <h3 className="text-3xl font-bubbly colorful-text mb-6">Music Maker 🎵</h3>
+            <div className="text-6xl mb-4">🎹</div>
+            <p className="text-xl text-primary-700 mb-6">
+              Create beautiful melodies! This premium feature is coming soon.
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setCurrentGame(null)}
+              className="game-button"
+            >
+              ← Back to Games
+            </motion.button>
+          </div>
+        )
+      case 'number-fun':
+        return (
+          <div className="baby-card max-w-4xl mx-auto text-center">
+            <h3 className="text-3xl font-bubbly colorful-text mb-6">Number Fun 🔢</h3>
+            <div className="text-6xl mb-4">🔢</div>
+            <p className="text-xl text-primary-700 mb-6">
+              Count and learn with our AI friend! This game is being developed.
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setCurrentGame(null)}
+              className="game-button"
+            >
+              ← Back to Games
+            </motion.button>
+          </div>
+        )
+      case 'memory-cards':
+        return (
+          <div className="baby-card max-w-4xl mx-auto text-center">
+            <h3 className="text-3xl font-bubbly colorful-text mb-6">Memory Cards 🧠</h3>
+            <div className="text-6xl mb-4">🃏</div>
+            <p className="text-xl text-primary-700 mb-6">
+              Test your memory with adaptive difficulty! Premium feature coming soon.
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setCurrentGame(null)}
+              className="game-button"
+            >
+              ← Back to Games
+            </motion.button>
+          </div>
+        )
+      default:
+        return (
+          <div className="baby-card max-w-4xl mx-auto text-center">
+            <h3 className="text-3xl font-bubbly colorful-text mb-6">Game Not Found 😅</h3>
+            <div className="text-6xl mb-4">❓</div>
+            <p className="text-xl text-primary-700 mb-6">
+              Oops! This game is still being developed.
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setCurrentGame(null)}
+              className="game-button"
+            >
+              ← Back to Games
+            </motion.button>
+          </div>
+        )
+    }
   }
 
   return (
@@ -146,26 +247,14 @@ export default function Home() {
           </div>
         )}
 
-        {/* Game content would be rendered here based on currentGame */}
+        {/* Game content - render actual games based on currentGame */}
         {currentGame && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="baby-card max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl font-bubbly text-center mb-6 colorful-text">
-              Loading {currentGame}... 🎮
-            </h2>
-            <div className="text-center">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                className="inline-block text-6xl"
-              >
-                🎯
-              </motion.div>
-            </div>
+            {renderGame()}
           </motion.div>
         )}
       </main>
